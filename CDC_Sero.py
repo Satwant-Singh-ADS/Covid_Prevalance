@@ -12,7 +12,10 @@ sero_data = pd.read_csv('dummy.csv')
 abvs = pd.read_csv('us_states_abbr_list.txt', header=None)
 
 state_map = dict(zip(abvs[0], range(len(abvs))))
-xx = sero_data['Median \nDonation Date']
+try:
+    xx = sero_data['Median \nDonation Date']
+except:
+    xx = sero_data['MedianDonationDate']
 whichday = [0]*len(xx)
 
 for ii in range(len(xx)):
