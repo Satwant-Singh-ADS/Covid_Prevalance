@@ -12,11 +12,11 @@ sero_data = pd.read_csv('dummy.csv')
 abvs = pd.read_csv('us_states_abbr_list.txt', header=None)
 
 state_map = dict(zip(abvs[0], range(len(abvs))))
-xx = sero_data['MedianDonationDate']
+xx = sero_data['Median \nDonation Date']
 whichday = [0]*len(xx)
 
 for ii in range(len(xx)):
-    whichday[ii] = (datetime.strptime(xx[ii], '%Y-%m-%d') - datetime(2020, 1, 23)).days
+    whichday[ii] = (datetime.strptime(xx[ii], '%m/%d/%Y') - datetime(2020, 1, 23)).days
 
 un_ts = [float('nan')]*len(data_4)
 un_lts = [float('nan')]*len(data_4)
