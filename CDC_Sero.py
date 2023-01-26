@@ -48,5 +48,26 @@ for cidx in range(data_4.shape[0]):
         un_lts[cidx, (ii)] = 0.01*sum(x1)*popu[cidx]/data_4[cidx, ii]
         un_ts[cidx, (ii)] = 0.01*sum(x2)*popu[cidx]/data_4[cidx, ii]
         un_uts[cidx, (ii)] = 0.01*sum(x3)*popu[cidx]/data_4[cidx, ii]
-        
+
+
+import numpy as np
+
+thisday = data_4.shape[1]
+un_ts[un_ts<1] = np.nan
+un_ts_s = np.nan_to_num(un_ts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
+un_ts_s = un_ts_s.interpolate(method='linear', limit_direction='forward', limit=2)
+un_ts_s = un_ts_s.interpolate(method='nearest', limit_direction='forward', limit=2)
+
+
+un_lts[un_lts<1] = np.nan
+un_lts = np.nan_to_num(un_lts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
+un_lts = un_lts.interpolate(method='linear', limit_direction='forward', limit=2)
+un_lts = un_lts.interpolate(method='nearest', limit_direction='forward', limit=2)
+
+un_uts[un_uts<1] = np.nan
+un_uts = np.nan_to_num(un_uts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
+un_uts = un_uts.interpolate(method='linear', limit_direction='forward', limit=2)
+un_uts = un_uts.interpolate(method='nearest', limit_direction='forward', limit=2)
+
+
 
