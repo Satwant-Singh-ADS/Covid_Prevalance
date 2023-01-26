@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from getDataCOVID_US import getDataCOVID_US
+
 # [tableConfirmed,tableDeaths,tableRecovered,time] = getDataCOVID_US()
 tableConfirmed, tableDeaths = getDataCOVID_US()
 
