@@ -58,16 +58,42 @@ un_ts_s = np.nan_to_num(un_ts[:, :thisday], nan=np.nan, posinf=None, neginf=None
 un_ts_s = un_ts_s.interpolate(method='linear', limit_direction='forward', limit=2)
 un_ts_s = un_ts_s.interpolate(method='nearest', limit_direction='forward', limit=2)
 
+un_ts_s.fillna(method='ffill', inplace=True)
+
 
 un_lts[un_lts<1] = np.nan
 un_lts = np.nan_to_num(un_lts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
 un_lts = un_lts.interpolate(method='linear', limit_direction='forward', limit=2)
 un_lts = un_lts.interpolate(method='nearest', limit_direction='forward', limit=2)
 
+un_lts.fillna(method='ffill', inplace=True)
+
 un_uts[un_uts<1] = np.nan
 un_uts = np.nan_to_num(un_uts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
 un_uts = un_uts.interpolate(method='linear', limit_direction='forward', limit=2)
 un_uts = un_uts.interpolate(method='nearest', limit_direction='forward', limit=2)
 
+un_uts.fillna(method='ffill', inplace=True)
+
+
+from scipy.signal import savgol_filter
+from numpy import diff, nan
+
+dd_s = smooth_epidata(data_4, 14)
+ddata = [0*popu, diff(dd_s, axis=1).T]
+
+true_new_infec = [
+    pd.Series(un_lts_s[:, :thisday]).rolling(window=28).mean()*ddata,
+    pd.Series(un_ts_s[:, :thisday]).rolling(window=28).mean()*ddata,
+    pd.Series(un_uts_s[:, :thisday]).rolling(window=28).mean()*ddata
+]
+import numpy as np
+
+un_array = [
+    np.nansum(un_lts_s * ddata, axis=1) / dd_s[:, -1],
+    np.nansum(un_ts_s * ddata, axis=1) / dd_s[:, -1],
+    np.nansum(un_uts_s * ddata, axis=1) / dd_s[:, -1]
+]
+un_array[np.isnan(un_array)] = 1
 
 
