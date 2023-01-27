@@ -11,7 +11,7 @@ with open('us_states_list.txt', 'r') as f:
     countries = f.read().splitlines()
 
 # passengerFlow = load('us_states_travel_data.txt')
-passengerFlow = np.loadtxt('us_states_travel_data.txt')
+passengerFlow = pd.read_csv("us_states_travel_data.txt",header=None).to_numpy()
 passengerFlow = passengerFlow - np.diag(np.diag(passengerFlow))
 
 # popu = load('us_states_population_data.txt')
