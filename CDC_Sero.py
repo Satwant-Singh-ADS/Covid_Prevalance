@@ -83,7 +83,7 @@ from scipy.signal import savgol_filter
 from numpy import diff, nan
 
 dd_s = smooth_epidata(data_4, 14)
-ddata = [0*popu, diff(dd_s, axis=1).T]
+ddata = ddata = np.multiply(0, np.diff(np.transpose(dd_s)))
 
 true_new_infec = [
     pd.Series(un_lts_s[:, :thisday]).rolling(window=28).mean()*ddata,
