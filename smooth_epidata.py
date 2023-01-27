@@ -1,14 +1,14 @@
 import numpy as np
 from scipy.signal import savgol_filter
 from csaps import csaps
-
+from scipy.signal import find_peaks
 
 def smooth_epidata(data_4, smooth_factor=1, week_correction=1, week_smoothing=1):
     if week_smoothing is None:
         week_smoothing = 1
     if week_correction is None:
         week_correction = 1
-    data_4 = np.interp(np.nan, (np.nan, np.nan), data_4)
+    data_4 = pd.DataFrame(data_4).interpolate(method='linear',limit=2,limit_direction='both')
     deldata = np.diff(data_4, axis=1)
     data_4_s = data_4
     maxt = data_4.shape[1]
@@ -17,7 +17,7 @@ def smooth_epidata(data_4, smooth_factor=1, week_correction=1, week_smoothing=1)
         cleandel = deldata
         if week_correction == 1:
             for cid in range(data_4.shape[0]):
-                week_dat = np.diff(data_4[cid, int(np.mod(maxt-1, 7))::7])
+                week_dat = week_dat = pd.DataFrame(data_4).loc[cid][list(range((maxt-1)%7,maxt,7))].diff()[1:]
                 clean_week = savgol_filter(week_dat, 15, 3)
                 peak_idx = np.array([i for i in range(1, len(week_dat)) if week_dat[i] > week_dat[i-1] and week_dat[i] > week_dat[i+1]])
                 tf_vals = np.intersect1d(np.where(week_dat != clean_week)[0], peak_idx)
