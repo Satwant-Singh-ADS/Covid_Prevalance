@@ -50,32 +50,33 @@ for cidx in range(data_4.shape[0]):
         un_ts[cidx, (ii)] = 0.01*x2*popu[cidx]/data_4[cidx, ii]
         un_uts[cidx, (ii)] = 0.01*x3*popu[cidx]/data_4[cidx, ii]
         
+                
         
 
 import numpy as np
 
 thisday = data_4.shape[1]
+
 un_ts[un_ts<1] = np.nan
 un_ts_s = np.nan_to_num(un_ts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
-un_ts_s = un_ts_s.interpolate(method='linear', limit_direction='forward', limit=2)
-un_ts_s = un_ts_s.interpolate(method='nearest', limit_direction='forward', limit=2)
+un_ts_s = pd.DataFrame(un_ts_s).interpolate(method='linear', limit_direction='forward', limit=2).to_numpy()
+un_ts_s = pd.DataFrame(un_ts_s).interpolate(method='nearest', limit_direction='forward', limit=2).to_numpy()
+un_ts_s = pd.DataFrame(un_ts_s).fillna(method='ffill').to_numpy()
 
-un_ts_s.fillna(method='ffill', inplace=True)
 
 
 un_lts[un_lts<1] = np.nan
-un_lts = np.nan_to_num(un_lts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
-un_lts = un_lts.interpolate(method='linear', limit_direction='forward', limit=2)
-un_lts = un_lts.interpolate(method='nearest', limit_direction='forward', limit=2)
-
-un_lts.fillna(method='ffill', inplace=True)
+un_lts_s = np.nan_to_num(un_lts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
+un_lts_s = pd.DataFrame(un_lts_s).interpolate(method='linear', limit_direction='forward', limit=2).to_numpy()
+un_lts_s = pd.DataFrame(un_lts_s).interpolate(method='nearest', limit_direction='forward', limit=2).to_numpy()
+un_lts_s = pd.DataFrame(un_lts_s).fillna(method='ffill').to_numpy()
 
 un_uts[un_uts<1] = np.nan
-un_uts = np.nan_to_num(un_uts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
-un_uts = un_uts.interpolate(method='linear', limit_direction='forward', limit=2)
-un_uts = un_uts.interpolate(method='nearest', limit_direction='forward', limit=2)
+un_uts_s = np.nan_to_num(un_uts[:, :thisday], nan=np.nan, posinf=None, neginf=None)
+un_uts_s = pd.DataFrame(un_uts_s).interpolate(method='linear', limit_direction='forward', limit=2).to_numpy()
+un_uts_s = pd.DataFrame(un_uts_s).interpolate(method='nearest', limit_direction='forward', limit=2).to_numpy()
+un_uts_s = pd.DataFrame(un_uts_s).fillna(method='ffill').to_numpy()
 
-un_uts.fillna(method='ffill', inplace=True)
 
 
 from scipy.signal import savgol_filter
