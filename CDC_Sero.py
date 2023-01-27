@@ -24,7 +24,8 @@ for ii in range(len(xx)):
 un_ts = [float('nan')]*len(data_4)
 un_lts = [float('nan')]*len(data_4)
 un_uts = [float('nan')]*len(data_4)
-un_idx = [float('nan')]*len(data_4)
+un_idx = np.empty(np.shape(data_4), dtype=object)
+
 
 #Note down where parts of different states occur in the table
 for ii in range(len(whichday)):
