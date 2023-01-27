@@ -29,9 +29,9 @@ un_idx = np.empty(np.shape(data_4), dtype=object)
 
 #Note down where parts of different states occur in the table
 for ii in range(len(whichday)):
-    if sero_data['RegionAbbreviation'][ii][:2] not in state_map:
+    if sero_data['RegionAbbreviation'][ii][:2].upper() not in state_map:
         continue
-    cidx = state_map[sero_data['RegionAbbreviation'][ii][:2]]
+    cidx = state_map[sero_data['RegionAbbreviation'][ii][:2].upper()]
     un_idx[cidx, whichday[ii]] = [un_idx[cidx, whichday[ii]], ii]
 
 un_ts = np.empty((data_4.shape[0],data_4.shape[1]))*np.nan
@@ -43,13 +43,14 @@ for cidx in range(data_4.shape[0]):
         if not un_idx[cidx, ii]:
             continue
         valid_idx = un_idx[cidx, ii]
-        x1 = sero_data["LowerCI__TotalPrevalence_"][valid_idx]*sero_data["n_TotalPrevalence_"][valid_idx]/sum(sero_data["n_TotalPrevalence_"][valid_idx])
-        x2 = sero_data["Rate__TotalPrevalence_"][valid_idx]*sero_data["n_TotalPrevalence_"][valid_idx]/sum(sero_data["n_TotalPrevalence_"][valid_idx])
-        x3 = sero_data["UpperCI__TotalPrevalence_"][valid_idx]*sero_data["n_TotalPrevalence_"][valid_idx]/sum(sero_data["n_TotalPrevalence_"][valid_idx])
-        un_lts[cidx, (ii)] = 0.01*sum(x1)*popu[cidx]/data_4[cidx, ii]
-        un_ts[cidx, (ii)] = 0.01*sum(x2)*popu[cidx]/data_4[cidx, ii]
-        un_uts[cidx, (ii)] = 0.01*sum(x3)*popu[cidx]/data_4[cidx, ii]
-
+        x1 = sero_data["Lower CI %[Total Prevalence]"][valid_idx]*sero_data["n [Total Prevalence]"][valid_idx]/sero_data["n [Total Prevalence]"][valid_idx]
+        x2 = sero_data["Rate %[Total Prevalence]"][valid_idx]*sero_data["n [Total Prevalence]"][valid_idx]/sero_data["n [Total Prevalence]"][valid_idx]
+        x3 = sero_data["Upper CI  %[Total Prevalence]"][valid_idx]*sero_data["n [Total Prevalence]"][valid_idx]/sero_data["n [Total Prevalence]"][valid_idx]
+        un_lts[cidx, (ii)] = 0.01*x1*popu[cidx]/data_4[cidx, ii]
+        un_ts[cidx, (ii)] = 0.01*x2*popu[cidx]/data_4[cidx, ii]
+        un_uts[cidx, (ii)] = 0.01*x3*popu[cidx]/data_4[cidx, ii]
+        
+        
 
 import numpy as np
 
