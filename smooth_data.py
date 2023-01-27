@@ -40,4 +40,4 @@ def smooth_epidata(data_4, smooth_factor=1, week_correction=1, week_smoothing=1)
             t = csaps(np.arange(len(xx)), xx, 0.00001, np.arange(len(xx)))
             t[t<0] = 0
             t = movmean(t, 7)
-            data_4_s[cid, :] = [data_4[cid, 0] cumsum(t, 2)]
+            data_4_s[cid,:] = [data_4[cid, 1], np.cumsum(t, axis=1)]
