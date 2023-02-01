@@ -65,7 +65,7 @@ with open('us_states_abbr_list.txt', 'r') as f:
     state_ab = f.read().splitlines()
 
 # Extract confirmed cases from JHU data
-vals = tableConfirmed.iloc[:, 13:].to_numpy() # Day-wise values
+vals = tableConfirmed.iloc[:, 12:].to_numpy() # Day-wise values
 if np.all(np.isnan(vals[:, -1])):
     vals = vals[:, :-1]
 data_4 = np.zeros((len(countries), vals.shape[1]))
