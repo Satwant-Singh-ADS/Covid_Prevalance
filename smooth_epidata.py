@@ -26,7 +26,7 @@ def hampel_filter_forloop(input_series, window_size=15, n_sigmas=4):
     
     return new_series, indices
 
-data_4 = pd.read_csv("matlab_python_poc/Covid_Prevalance/data_4.csv",header=None)
+data_4 = pd.read_csv("data_4.csv",header=None)
 
 def Smooth_epiData(data_4,smooth_factor = 14,week_correction = 1,week_smoothing = 1):
     
