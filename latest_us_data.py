@@ -102,4 +102,9 @@ def get_data():
 #     print(a)
     pickle.dump(a, filehandler)
 
-
+#### Add below lines to whereever you want to call this Python file
+# from latest_us_data import *
+# #get_data()
+# filehandler = open("data_4.pkl", 'rb') 
+# #     print(a)
+# data_4 = pickle.load(filehandler)
