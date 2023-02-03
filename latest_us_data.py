@@ -92,3 +92,14 @@ def get_latest_data():
     data_4_JHU = data_4
     deaths_JHU = deaths
     return data_4_JHU
+
+
+import pickle  
+
+def get_data():
+    a = get_latest_data()
+    filehandler = open("data_4.pkl", 'wb') 
+#     print(a)
+    pickle.dump(a, filehandler)
+
+
