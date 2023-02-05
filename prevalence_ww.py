@@ -181,6 +181,15 @@ true_new_infec_ww[2][np.isnan(true_new_infec_ww[2])] = 0
 true_new_infec_ww[2] = pd.DataFrame(np.maximum(true_new_infec_ww[2],true_new_infec[2].to_numpy())).rolling(14,axis=1,min_periods=0).mean().to_numpy()
 
 
+bad_states = ((~np.isnan(ww_ts)).sum(axis=1) < 1) & ((~np.isnan(true_new_infec[1])).sum(axis=1) > 1)
+
+
+true_new_infec_ww[0][bad_states, :] = true_new_infec[0][bad_states].to_numpy()
+true_new_infec_ww[1][bad_states, :] = true_new_infec[1][bad_states].to_numpy()
+true_new_infec_ww[2][bad_states, :] = true_new_infec[2][bad_states].to_numpy()
+
+
+
 bad_states = (np.isnan(ww_ts).sum(axis=1)<1) & (np.isnan(true_new_infec[1]).sum(axis=1)<1)
 
 
