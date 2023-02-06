@@ -228,12 +228,12 @@ def CDC_SERO_Function():
     #                     except:
     #                         print(cidx,ii)
     #                         break
-                        try:
-                            un_lts[cidx, (ii)] = x1*popu[cidx]/data_4.iloc[cidx, ii]
-                            un_ts[cidx, (ii)] = x2*popu[cidx]/data_4.iloc[cidx, ii]
-                            un_uts[cidx, (ii)] = x3*popu[cidx]/data_4.iloc[cidx, ii]
-                        except:
-                            continue
+#                         try:
+                        un_lts[cidx, (ii)] = x1*popu[cidx]/data_4[cidx, ii]
+                        un_ts[cidx, (ii)] = x2*popu[cidx]/data_4[cidx, ii]
+                        un_uts[cidx, (ii)] = x3*popu[cidx]/data_4[cidx, ii]
+#                         except:
+#                             continue
 
 
 
