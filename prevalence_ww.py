@@ -63,7 +63,7 @@ ww_ts = np.zeros((data_4.shape[0],data_4.shape[1]))
 
 ww_pres = np.zeros((data_4.shape[0],data_4.shape[1]))
 
- %Get inicies of states according to abvs
+#  %Get inicies of states according to abvs
     
 abvs_idx = [abvs.index(i) for i in ww_data.state if i in abvs]
 
