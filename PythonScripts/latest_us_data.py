@@ -54,14 +54,14 @@ def get_latest_data():
         countries = f.read().splitlines()
 
     # passengerFlow = load('us_states_travel_data.txt')
-    passengerFlow = pd.read_csv("us_states_travel_data.txt",header=None).to_numpy()
+    passengerFlow = pd.read_csv("../Static_Files/us_states_travel_data.txt",header=None).to_numpy()
     passengerFlow = passengerFlow - np.diag(np.diag(passengerFlow))
 
     # popu = load('us_states_population_data.txt')
-    popu = np.loadtxt('us_states_population_data.txt')
+    popu = np.loadtxt('../Static_Files/us_states_population_data.txt')
 
     # state_ab = readcell('us_states_abbr_list.txt', 'Delimiter','')
-    with open('us_states_abbr_list.txt', 'r') as f:
+    with open('../Static_Files/us_states_abbr_list.txt', 'r') as f:
         state_ab = f.read().splitlines()
 
     # Extract confirmed cases from JHU data
@@ -98,7 +98,7 @@ import pickle
 
 def get_data():
     a = get_latest_data()
-    filehandler = open("data_4.pkl", 'wb') 
+    filehandler = open("../Output_Pickles/data_4.pkl", 'wb') 
 #     print(a)
     pickle.dump(a, filehandler)
 

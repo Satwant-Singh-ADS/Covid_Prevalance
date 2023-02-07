@@ -145,7 +145,7 @@ def CDC_SERO_Function():
 
     import pickle
 
-    filehandler = open("data_4.pkl", 'rb') 
+    filehandler = open("../Output_Pickles/data_4.pkl", 'rb') 
     #     print(a)
     data_4 = pickle.load(filehandler)
 
@@ -179,7 +179,7 @@ def CDC_SERO_Function():
                                                        }).reset_index()
 
 
-    abvs = pd.read_csv('us_states_abbr_list.txt', header=None)
+    abvs = pd.read_csv('../Static_Files/us_states_abbr_list.txt', header=None)
 
     state_map = dict(zip(abvs[0], range(len(abvs))))
     try:
@@ -205,7 +205,7 @@ def CDC_SERO_Function():
     sero_data_processed['cidx'] = sero_data_processed['Region Abbreviation_tmp'].apply(lambda x : \
                                                        state_map.get(x,None))
 
-    popu_tmp = pd.read_csv("us_states_population_data.txt",header=None)
+    popu_tmp = pd.read_csv("../Static_Files/us_states_population_data.txt",header=None)
 
     popu = popu_tmp[0].to_list()
 
@@ -287,9 +287,9 @@ def CDC_SERO_Function():
 
 
     import pickle 
-    with open("true_new_infec.pkl", "wb") as f:
+    with open("../Output_Pickles/true_new_infec.pkl", "wb") as f:
         pickle.dump(true_new_infec, f)
-    with open("un_array.pkl", "wb") as f:
+    with open("../Output_Pickles/un_array.pkl", "wb") as f:
         pickle.dump(un_array, f)
 #     print(un_array)
     

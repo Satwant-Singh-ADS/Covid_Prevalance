@@ -7,10 +7,10 @@ from smooth_epidata import *
 sel_url = 'https://raw.githubusercontent.com/biobotanalytics/covid19-wastewater-data/master/wastewater_by_county.csv'
 ww_data = pd.read_csv(sel_url)
 
-abvs = pd.read_csv('us_states_abbr_list.txt', header=None)[0].to_list()
+abvs = pd.read_csv('../Static_Files/us_states_abbr_list.txt', header=None)[0].to_list()
 
 
-fips_tab = pd.read_csv('reich_fips.txt')
+fips_tab = pd.read_csv('../Static_Files/reich_fips.txt')
 
 # %Change US code to 0
 def impute_us(x):
@@ -52,7 +52,7 @@ for ii in range(len(xx)):
 # %%
 from latest_us_data import *
 get_data()
-filehandler = open("data_4.pkl", 'rb') 
+filehandler = open("../Output_Pickles/data_4.pkl", 'rb') 
 #     print(a)
 data_4 = pickle.load(filehandler)
 
@@ -67,7 +67,7 @@ ww_pres = np.zeros((data_4.shape[0],data_4.shape[1]))
     
 abvs_idx = [abvs.index(i) for i in ww_data.state if i in abvs]
 
-popu = np.loadtxt('us_states_population_data.txt')
+popu = np.loadtxt('../Static_Files/us_states_population_data.txt')
 
 
 #  %ignore dates before 2020,1,23 and unavailable states
@@ -155,11 +155,11 @@ from CDC_Sero import *
 CDC_SERO_Function()
 
 
-filehandler = open("true_new_infec.pkl", 'rb') 
+filehandler = open("../Output_Pickles/true_new_infec.pkl", 'rb') 
 true_new_infec = pickle.load(filehandler)
 
 
-filehandler = open("un_array.pkl", 'rb') 
+filehandler = open("../Output_Pickles/un_array.pkl", 'rb') 
 un_array = pickle.load(filehandler)
 
 
@@ -249,9 +249,9 @@ true_new_infec_ww[1][bad_states, :] = data_diff[bad_states, :]
 true_new_infec_ww[2][bad_states, :] = data_diff[bad_states, :]
 
 import pickle 
-with open("true_new_infec_ww.pkl", "wb") as f:
+with open("../Output_Pickles/true_new_infec_ww.pkl", "wb") as f:
     pickle.dump(true_new_infec_ww, f)
-with open("true_new_infec_final.pkl", "wb") as f:
+with open("../Output_Pickles/true_new_infec_final.pkl", "wb") as f:
     pickle.dump(true_new_infec, f)
 
 
