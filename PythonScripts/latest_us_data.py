@@ -50,7 +50,7 @@ def get_latest_data():
     tableConfirmed, tableDeaths = getDataCOVID_US()
 
     # countries = readcell('us_states_list.txt', 'Delimiter','')
-    with open('us_states_list.txt', 'r') as f:
+    with open('../Static_Files/us_states_list.txt', 'r') as f:
         countries = f.read().splitlines()
 
     # passengerFlow = load('us_states_travel_data.txt')
