@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.signal import savgol_filter
-from csaps import csaps
 from scipy.signal import find_peaks
 
 import pandas as pd
