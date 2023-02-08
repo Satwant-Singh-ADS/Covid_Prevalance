@@ -1,16 +1,34 @@
 import pandas as pd
 import requests
 import datetime
+import numpy as np
+from datetime import datetime, timedelta
 
+import csaps
+
+
+### smooth_epidata is a function to be loaded from scripts folder
 from smooth_epidata import *
+
+######## Hyper Parameters for the code
+
+wlag = 7       ##### should be >=0
+
+## 200 and 600 represent number of days since 23 Jan 2020
+
+eq_range = range(200,601)
+
+
+### Data loads
+
+popu = np.loadtxt('../Static_Files/us_states_population_data.txt')
+abvs = pd.read_csv('../Static_Files/us_states_abbr_list.txt', header=None)[0].to_list()
+fips_tab = pd.read_csv('../Static_Files/reich_fips.txt')
+
 
 sel_url = 'https://raw.githubusercontent.com/biobotanalytics/covid19-wastewater-data/master/wastewater_by_county.csv'
 ww_data = pd.read_csv(sel_url)
 
-abvs = pd.read_csv('../Static_Files/us_states_abbr_list.txt', header=None)[0].to_list()
-
-
-fips_tab = pd.read_csv('../Static_Files/reich_fips.txt')
 
 # %Change US code to 0
 def impute_us(x):
@@ -36,8 +54,6 @@ for w in range(len(ww_data_fips)):
         fips_idx.append(0)
         
 
-import numpy as np
-from datetime import datetime, timedelta
 xx = ww_data.sampling_week.to_list()     
 ### %sampling_week column values
 
@@ -67,7 +83,6 @@ ww_pres = np.zeros((data_4.shape[0],data_4.shape[1]))
     
 abvs_idx = [abvs.index(i) for i in ww_data.state if i in abvs]
 
-popu = np.loadtxt('../Static_Files/us_states_population_data.txt')
 
 
 #  %ignore dates before 2020,1,23 and unavailable states
@@ -121,9 +136,6 @@ ww_tsw = np.insert(ww_ts[:, 5::7], 0, 0, axis=1)
 weekly_dat = np.insert(np.diff(ww_tsw, axis=1), 0, 0, axis=1)
 
 
-import csaps
-
-wlag = 7
 ww_tsm[ww_ts == 0] = np.nan
 f = np.empty_like(ww_ts)
 f[:, wlag:] = ww_ts[:, :-wlag] / data_diff[:, wlag:]
@@ -168,7 +180,6 @@ true_new_infec[1] = (true_new_infec[1]+abs(true_new_infec[1]))/2
 true_new_infec[2] = (true_new_infec[2]+abs(true_new_infec[2]))/2
 
 
-eq_range = range(200,601)
 nz_idx = ww_adj[:, eq_range]>0.5
 
 ww_year1 = np.nansum(ww_adj[:, eq_range]*nz_idx, axis=1)
