@@ -18,6 +18,8 @@ wlag = 7       ##### should be >=0
 
 eq_range = range(200,601)
 
+smooth_factor = 14
+
 
 ### Data loads
 
@@ -111,10 +113,10 @@ ww_ts1 = pd.DataFrame(ww_ts).interpolate( limit_direction='both', axis=1).to_num
 
 # %use movingmean filter to smooth
 
-ww_tsm = pd.DataFrame(ww_ts1).rolling(14, axis=1).mean().to_numpy()
+ww_tsm = pd.DataFrame(ww_ts1).rolling(smooth_factor, axis=1).mean().to_numpy()
 
 #  %Use custom smooth_epidata to filter . Smooth_epidata function definition in other file 
-data_4_s = Smooth_epiData(data_4,smooth_factor = 14,week_correction = 0,week_smoothing = 1)
+data_4_s = Smooth_epiData(data_4,smooth_factor = smooth_factor,week_correction = 0,week_smoothing = 1)
 
 
 # %Let day 0=0s and instead of having cumilative cases up to day, use diff to find daily cases at day x
@@ -198,7 +200,7 @@ true_new_infec_ww[0] = ww_adj*b.reshape((b.size, 1))
 true_new_infec_ww[0][np.isnan(true_new_infec_ww[0])] = 0
 
 
-true_new_infec_ww[0] = pd.DataFrame(np.maximum(true_new_infec_ww[0],true_new_infec[0].to_numpy())).rolling(14,axis=1,min_periods=0).mean().to_numpy()
+true_new_infec_ww[0] = pd.DataFrame(np.maximum(true_new_infec_ww[0],true_new_infec[0].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
 
 
 eq_range = range(200,601)
@@ -216,7 +218,7 @@ true_new_infec_ww[1] = ww_adj*b.reshape((b.size, 1))
 true_new_infec_ww[1][np.isnan(true_new_infec_ww[1])] = 0
 
 
-true_new_infec_ww[1] = pd.DataFrame(np.maximum(true_new_infec_ww[1],true_new_infec[1].to_numpy())).rolling(14,axis=1,min_periods=0).mean().to_numpy()
+true_new_infec_ww[1] = pd.DataFrame(np.maximum(true_new_infec_ww[1],true_new_infec[1].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
 
 
 eq_range = range(200,601)
@@ -234,7 +236,7 @@ true_new_infec_ww[2] = ww_adj*b.reshape((b.size, 1))
 true_new_infec_ww[2][np.isnan(true_new_infec_ww[2])] = 0
 
 
-true_new_infec_ww[2] = pd.DataFrame(np.maximum(true_new_infec_ww[2],true_new_infec[2].to_numpy())).rolling(14,axis=1,min_periods=0).mean().to_numpy()
+true_new_infec_ww[2] = pd.DataFrame(np.maximum(true_new_infec_ww[2],true_new_infec[2].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
 
 # %replace bad states
 
