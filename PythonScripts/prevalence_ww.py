@@ -8,16 +8,21 @@ import numpy as np
 ### smooth_epidata is a function to be loaded from scripts folder
 from smooth_epidata import *
 
-######## Hyper Parameters for the code
+################# Hyper Parameters for the code #######################
 
 wlag = 7       ##### should be >=0
 
 ## 200 and 600 represent number of days since 23 Jan 2020
 
-eq_range = range(200,601)
+###eq_range = range(200,601)
+
+eq_start = '2020-08-10'
+eq_end = '2021-09-14'
+
 
 smooth_factor = 14
 
+##########################################################################
 
 ### Data loads
 
@@ -181,6 +186,14 @@ true_new_infec[0] = (true_new_infec[0]+abs(true_new_infec[0]))/2
 true_new_infec[1] = (true_new_infec[1]+abs(true_new_infec[1]))/2
 true_new_infec[2] = (true_new_infec[2]+abs(true_new_infec[2]))/2
 
+from datetime import datetime, timedelta
+
+days_start = int((datetime.strptime(eq_start, '%Y-%m-%d') - datetime(2020, 1, 23)).days)
+
+
+days_end = int((datetime.strptime(eq_end, '%Y-%m-%d') - datetime(2020, 1, 23)).days)
+
+eq_range = range(days_start,days_end)
 
 nz_idx = ww_adj[:, eq_range]>0.5
 
