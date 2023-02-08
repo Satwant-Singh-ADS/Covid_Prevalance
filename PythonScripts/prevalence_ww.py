@@ -2,9 +2,7 @@ import pandas as pd
 import requests
 import datetime
 import numpy as np
-from datetime import datetime, timedelta
 
-import csaps
 
 
 ### smooth_epidata is a function to be loaded from scripts folder
@@ -61,6 +59,7 @@ xx = ww_data.sampling_week.to_list()
 
 
 # %Set whichday to be array of day # correspodning to day since 2020,1,23
+from datetime import datetime, timedelta
 
 whichday = np.zeros(len(xx))
 for ii in range(len(xx)):
@@ -144,6 +143,7 @@ f[:, wlag:] = ww_ts[:, :-wlag] / data_diff[:, wlag:]
 f[:, :200] = np.nan
 f1 = f
 
+import csaps
 
 for jj in range(f1.shape[0]):
     xx = np.flatnonzero(~np.isnan(f1[jj,:]))
