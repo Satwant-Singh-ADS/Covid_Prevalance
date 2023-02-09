@@ -1,11 +1,11 @@
 # Covid-19 Prevalance
 This code is written in Python and uses the following libraries:
 
-<br/>pandas
-requests
-datetime
-numpy
-scipy
+<br>pandas
+<br>requests
+<br>datetime
+<br>numpy
+<br>scipy
 
 
 ### Hyperparameters for the code are defined and include:
