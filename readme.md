@@ -1,4 +1,9 @@
 # Covid-19 Prevalance
+This code processes wastewater data to estimate the SARS-CoV-2 concentration over time for each state in the United States.
+The resulting data can be used to create heatmaps that can be used to visualize changes in the SARS-CoV-2 concentration over time.
+These heatmaps can provide valuable insights into the spread of the virus, allowing public health officials to make informed decisions about how to respond to the pandemic.
+<br>
+
 This code is written in Python and uses the following libraries:
 
 <br>
@@ -54,7 +59,5 @@ The resulting data is stored in two matrices, ww_ts and ww_pres, where ww_ts hol
 The data is finally set to NaN values in ww_ts if the corresponding value in ww_pres is less than 1. 
 The processed data can then be used for further analysis, such as forecasting and modeling.
 
-This code processes wastewater data to estimate the SARS-CoV-2 concentration over time for each state in the United States.
-The resulting data can be used to create heatmaps that can be used to visualize changes in the SARS-CoV-2 concentration over time.
-These heatmaps can provide valuable insights into the spread of the virus, allowing public health officials to make informed decisions about how to respond to the pandemic.
+
 
