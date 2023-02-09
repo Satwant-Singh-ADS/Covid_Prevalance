@@ -15,10 +15,10 @@ scipy==1.10.0<br>
 
 ### Hyperparameters for the code are defined and include:
 
-wlag
-eq_start
-eq_end
-smooth_factor
+wlag<br>
+eq_start<br>
+eq_end<br>
+smooth_factor<br>
 
 ### The code loads data from several sources:
 
