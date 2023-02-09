@@ -1,7 +1,7 @@
 # Covid-19 Prevalance
 This code is written in Python and uses the following libraries:
 
-pandas
+<br/>pandas
 requests
 datetime
 numpy
