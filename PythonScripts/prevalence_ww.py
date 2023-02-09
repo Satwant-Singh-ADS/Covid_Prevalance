@@ -212,8 +212,14 @@ true_new_infec_ww[0] = ww_adj*b.reshape((b.size, 1))
 
 true_new_infec_ww[0][np.isnan(true_new_infec_ww[0])] = 0
 
+part2 = data_diff*un_array[0].reshape(un_array[0].size, 1)
 
-true_new_infec_ww[0] = pd.DataFrame(np.maximum(true_new_infec_ww[0],true_new_infec[0].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
+true_new_infec_ww[0] = pd.DataFrame(np.maximum(true_new_infec_ww[0],\
+                                   np.maximum(true_new_infec[0].to_numpy(),\
+                                             part2,\
+                                             ))).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
+
+###true_new_infec_ww[0] = pd.DataFrame(np.maximum(true_new_infec_ww[0],true_new_infec[0].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
 
 
 eq_range = range(200,601)
@@ -230,8 +236,15 @@ true_new_infec_ww[1] = ww_adj*b.reshape((b.size, 1))
 
 true_new_infec_ww[1][np.isnan(true_new_infec_ww[1])] = 0
 
+part2 = data_diff*un_array[1].reshape(un_array[1].size, 1)
 
-true_new_infec_ww[1] = pd.DataFrame(np.maximum(true_new_infec_ww[1],true_new_infec[1].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
+true_new_infec_ww[1] = pd.DataFrame(np.maximum(true_new_infec_ww[1],\
+                                   np.maximum(true_new_infec[1].to_numpy(),\
+                                             part2,\
+                                             ))).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
+
+
+##true_new_infec_ww[1] = pd.DataFrame(np.maximum(true_new_infec_ww[1],true_new_infec[1].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
 
 
 eq_range = range(200,601)
@@ -248,8 +261,15 @@ true_new_infec_ww[2] = ww_adj*b.reshape((b.size, 1))
 
 true_new_infec_ww[2][np.isnan(true_new_infec_ww[2])] = 0
 
+part2 = data_diff*un_array[2].reshape(un_array[2].size, 1)
 
-true_new_infec_ww[2] = pd.DataFrame(np.maximum(true_new_infec_ww[2],true_new_infec[2].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
+true_new_infec_ww[2] = pd.DataFrame(np.maximum(true_new_infec_ww[2],\
+                                   np.maximum(true_new_infec[2].to_numpy(),\
+                                             part2,\
+                                             ))).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
+
+
+##true_new_infec_ww[2] = pd.DataFrame(np.maximum(true_new_infec_ww[2],true_new_infec[2].to_numpy())).rolling(smooth_factor,axis=1,min_periods=0).mean().to_numpy()
 
 # %replace bad states
 
