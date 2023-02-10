@@ -4,7 +4,7 @@ sel_url = 'https://raw.githubusercontent.com/biobotanalytics/covid19-wastewater-
 urlwrite(sel_url, 'dummy.csv');
 ww_data = readtable('dummy.csv');
 abvs = readcell('us_states_abbr_list.txt');
-fips_tab = readtable('reich_fips.txt', 'Format', '%s%s%s%d');
+fips_tab = readtable('fips_table.txt', 'Format', '%s%s%s%d');
 load latest_us_data.mat %THIS SHOULD BE UPDATED CONSISTENTLY. SHOULD BE ON GITHUB BUT NOT BEING UPDATED: https://github.com/scc-usc/ReCOVER-COVID-19/tree/master/matlab%20scripts. FOR NOW CAN GET FROM SERVER IF NEED BE
 %%
 fips_tab.location(strcmpi(fips_tab.location, 'US')) = {'0'}; %Change US code to 0
