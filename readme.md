@@ -38,7 +38,7 @@ scipy==1.10.0
 `latest_us_data.py`: Loads recent time-series for COVID-19 reported cases in the states of the US <br>
 `smooth_epidata.py`: Preprocessing function to smooth and remove outliers from time-series <br>
 
-All the secondary files are called in the main `prevalance_ww.py`` and necessary files are stored as Pickle objects in Output_Pickles Folder.
+All the secondary files are called in the main `prevalance_ww.py` and necessary files are stored as Pickle objects in Output_Pickles Folder.
 
 ### List of output files
 ```
