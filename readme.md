@@ -2,7 +2,7 @@
 This code estimates true new infections of COVID-19 over time in each state of the US based on a combination of wastewater data and seroprevalence data. 
 
 ## Summary
-The code obtains the COVID-19 wastewater concentration data, smooths it and scales it in a way that during the early part of the pandemic the time-series matches with that obtained by processing seroprevalence data. The output is `ww_ts`, which holds the time series data of estimated new COVID-19 infections for each state over days since January 23, 2020. 
+The code obtains the COVID-19 wastewater concentration data, smooths it and scales it in a way that during the early part of the pandemic the time-series matches with that obtained by processing seroprevalence data. The output is `true_new_infec_ww`, which holds the time series data of estimated new COVID-19 infections for each state over days since January 23, 2020. 
 <br>
 
 The Python code uses the following libraries:
