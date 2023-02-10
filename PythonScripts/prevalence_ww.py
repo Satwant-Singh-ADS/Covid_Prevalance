@@ -294,13 +294,19 @@ true_new_infec_ww[0][bad_states, :] = data_diff[bad_states, :]
 true_new_infec_ww[1][bad_states, :] = data_diff[bad_states, :]
 true_new_infec_ww[2][bad_states, :] = data_diff[bad_states, :]
 
-print(true_new_infec_ww)
+# print(true_new_infec_ww)
 
 import pickle 
 with open("../Output_Pickles/true_new_infec_ww.pkl", "wb") as f:
     pickle.dump(true_new_infec_ww, f)
 with open("../Output_Pickles/true_new_infec_final.pkl", "wb") as f:
     pickle.dump(true_new_infec, f)
+
+with open("../Output_Pickles/data_diff.pkl", "wb") as f:
+    pickle.dump(data_diff, f)
+
+with open("../Output_Pickles/ww_ts.pkl", "wb") as f:
+    pickle.dump(ww_ts, f)
 
 
 print("Process completed")
