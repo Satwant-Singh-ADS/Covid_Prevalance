@@ -1,10 +1,11 @@
 # Covid-19 Prevalance
-This code processes wastewater data to estimate the SARS-CoV-2 concentration over time for each state in the United States.
-The resulting data can be used to create heatmaps that can be used to visualize changes in the SARS-CoV-2 concentration over time.
-These heatmaps can provide valuable insights into the spread of the virus, allowing public health officials to make informed decisions about how to respond to the pandemic.
+This code estimates true new infections of COVID-19 over time in each state of the US based on a combination of wastewater data and seroprevalence data. 
+
+## Summary
+The code obtains the COVID-19 wastewater concentration data, smooths it and scales it in a way that during the early part of the pandemic the time-series matches with that obtained by processing seroprevalence data. The output is `ww_ts`, which holds the time series data of estimated new COVID-19 infections for each state over days since January 23, 2020. 
 <br>
 
-This code is written in Python and uses the following libraries:
+The Python code uses the following libraries:
 
 <br>
 csaps==1.1.0<br>
@@ -13,51 +14,39 @@ pandas==1.5.0<br>
 requests==2.28.1<br>
 scipy==1.10.0<br>
 
-### Hyperparameters for the code are defined and include:
+### The following hyperparameters can be reset by the user:
 
-wlag<br>
-eq_start<br>
-eq_end<br>
-smooth_factor<br>
+`wlag`: The expected lag between the reported cases time-series and the wastewater time-series <br>
+`eq_start`: The start date for matching against seroprevalence data  <br>
+`eq_end`: The end date for matching against seroprevalence data  <br>
+`smooth_factor`: Smoothing window in number of days <br>
 
 ### The code loads data from several sources:
-
-us_states_population_data.txt
-us_states_abbr_list.txt
-reich_fips.txt
-wastewater_by_county.csv
-
-The code manipulates the loaded data and defines two matrices (ww_ts and ww_pres) of size (# of states x days).
+1. Biobot.io [COVID-19 Wastewater Concentration](https://raw.githubusercontent.com/biobotanalytics/covid19-wastewater-data/master/wastewater_by_county.csv)
+2. [2020-2021 Nationwide Blood Donor Seroprevalence Survey Infection-Induced Seroprevalence Estimates](https://data.cdc.gov/api/views/mtc3-kq6r/rows.csv?accessType=DOWNLOAD)
+3. `us_states_population_data.txt`: List of populations by state
+4. `us_states_abbr_list.txt`: List of state abbreviations
+5. `fips_table.txt`: FIPS information on US counties and states
 
 ### There are total 4 Python scripts in the Folder.
-
-Prevalence_ww.py is the main file which user needs to run-
-  python Prevalence_ww.py executes everything
+  `python Prevalence_ww.py` executes everything
 
 #### Secondary files
 
-1. CDC_Sero.py
-2. getDataCOVID_US.py
-3. latest_us_data.py
-4. smooth_epidata.py
+`CDC_Sero.py`: Loads and processes seroprevalence data <br>
+`latest_us_data.py`: Loads recent time-series for COVID-19 reported cases in the states of the US <br>
+`smooth_epidata.py`: Preprocessing function to smooth and remove outliers from time-series <br>
 
-All the secondary files are called in the main Prevalance_ww file and necessary files are stored as Pickle objects in Output_Pickles Folder.
+All the secondary files are called in the main `prevalance_ww.py`` and necessary files are stored as Pickle objects in Output_Pickles Folder.
 
 ### List of output files
+```
 1. true_new_infec_ww.pkl
 2. true_new_infec_final.pkl
 3. un_array.pkl
+```
 
 
-The code also imports data from a file named latest_us_data.py and loads it into a pickle file named data_4.pkl.
-
-Any missing data or data from dates before 2020-01-23 and for unavailable states is ignored in the code.
-The code is meant to extract COVID-19 wastewater data, clean and process it, and prepare it for analysis.
-The code takes data from various sources, including a CSV file from a GitHub repository, and a data_4 object from a pickle file. 
-It then calculates the time series of wastewater data for each state and the corresponding day since January 23, 2020. 
-The resulting data is stored in two matrices, ww_ts and ww_pres, where ww_ts holds the time series data, and ww_pres holds information about whether data is available for a state and a corresponding day. 
-The data is finally set to NaN values in ww_ts if the corresponding value in ww_pres is less than 1. 
-The processed data can then be used for further analysis, such as forecasting and modeling.
 
 
 
