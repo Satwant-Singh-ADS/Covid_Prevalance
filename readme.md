@@ -7,12 +7,13 @@ The code obtains the COVID-19 wastewater concentration data, smooths it and scal
 
 The Python code uses the following libraries:
 
-<br>
-csaps==1.1.0<br>
-numpy==1.23.3<br>
-pandas==1.5.0<br>
-requests==2.28.1<br>
-scipy==1.10.0<br>
+```
+csaps==1.1.0
+numpy==1.23.3
+pandas==1.5.0
+requests==2.28.1
+scipy==1.10.0
+```
 
 ### The following hyperparameters can be reset by the user:
 
