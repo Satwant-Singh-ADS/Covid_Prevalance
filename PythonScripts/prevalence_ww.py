@@ -28,7 +28,7 @@ smooth_factor = 14
 
 popu = np.loadtxt('../Static_Files/us_states_population_data.txt')
 abvs = pd.read_csv('../Static_Files/us_states_abbr_list.txt', header=None)[0].to_list()
-fips_tab = pd.read_csv('../Static_Files/reich_fips.txt')
+fips_tab = pd.read_csv('../Static_Files/fips_table.txt')
 
 
 sel_url = 'https://raw.githubusercontent.com/biobotanalytics/covid19-wastewater-data/master/wastewater_by_county.csv'
